@@ -1,0 +1,16 @@
+{% extends 'main/basic.html' %}
+
+{% block title %}
+    Удаление аккаунта
+{% endblock %}
+
+{% block content %}
+    <h2>Удаление аккаунта {{ object.name }}</h2>
+    <p>Вы уверены что хотите удалить аккаунт?</p>
+    <p>Это действие необратимо. Ваши товары которые вы отслеживаете так же удалятся.</p>
+    <form method="post">
+        {% csrf_token %}
+        <a href="{% url 'main:index' %}">Нет, вернуться на главную</a>
+        <button type="submit">Да уверен, удалить</button>
+    </form>
+{% endblock %}

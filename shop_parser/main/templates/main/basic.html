@@ -1,0 +1,72 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo"><h1>Logo</h1></div>
+            <div class="theme_button">
+                <a href="#"><img src="{% static 'main/img/theme.png' %}" alt="Смена темы" class="theme_icon"></a>
+            </div>
+        </div>
+        <div class="sorting_buttons">
+            <ul class="sorting_buttons_list">
+                <li class="sort_button"><a href="#">Все товары</a></li>
+                <li class="sort_button"><a href="#">Самые подорожавшие</a></li>
+                <li class="sort_button"><a href="#">Самые подешевевшие</a></li>
+                <li class="sort_button"><a href="#">Категория ↑</a></li>
+                <li class="sort_button"><a href="#">Категория ↓</a></li>
+            </ul>
+        </div>
+        <div class="marketplace_buttons">
+            <ul class="marketplace_buttons_list">
+                <li class="market_button" ><a href="#">Все магазины</a></li>
+                <li class="market_button" ><a href="#">Ozon</a></li>
+                <li class="market_button" ><a href="#">Перекресток</a></li>
+                <li class="market_button" ><a href="#">Wildberrys</a></li>
+            </ul>
+        </div>
+        <div class="messages">
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li class="{{ message.tags }}">
+                            {{ message|safe }}
+                            <a href="#" class="close">✖</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+        {% block content %}{% endblock %}
+        <div class="login_button">
+            {% if user.is_authenticated %}
+            {% if request.path != '/accounts/user_goods/' %}
+                <p><a href="{% url 'main:user_goods' %}">Ваши товары</a></p>
+            {% endif %}
+            {% if request.path != '/accounts/profile/' %}
+                <p><a href="{% url 'main:profile' %}">Профиль {{ user.username }}</a></p>
+            {% endif %}
+                <p><a href="{% url 'main:logout' %}">Выход</a></p>
+            {% else %}
+                {% if request.path != '/accounts/login/' %}
+                    <a href="{% url 'main:login' %}">Вход</a>
+                {% endif %}
+            {% endif %}
+        </div>
+        <footer>
+            <div class="footer_container">
+                <p class="copyrights">Создано <a href="#">Espadane</a> при неоценимой поддержке <a href="#">Марковки</a></p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

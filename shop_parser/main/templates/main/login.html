@@ -1,0 +1,21 @@
+{% extends 'main/basic.html' %}
+
+{% block title %}
+    Вход
+{% endblock %}
+
+{% block content %}
+    <h2>Вход на сайт</h2>
+    {% if user.is_authenticated %}
+        <p>Вы уже вошли</p>
+    {% else %}
+        <form method="post">
+            {% csrf_token %}
+            {{ form }}
+            <button type="submit">Войти</button>
+        </form>
+        <input type="hidden" name="next" value="{{ next }}">
+        <button type="submit">Войти</button>
+        <p>Нет учетной записи? <a href="{% url 'main:register' %}">Регистрация</a></p>
+    {% endif %}
+{% endblock %}

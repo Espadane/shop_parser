@@ -68,7 +68,7 @@
     * Aiogram для интеграции с Telegram 
     * Docker для контейнеризации 
 - Фронтенд: 
-    * Bootstrap 4
+    * Чистый HTML и CSS
     * React
 
 # 4. Требования к дизайну
